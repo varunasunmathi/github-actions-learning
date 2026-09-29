@@ -7,6 +7,10 @@ on:
         required: true
         type: string
 
+    secrets:
+      demo-secret:
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,6 +25,11 @@ jobs:
           mkdir build
           echo "Hello from ${{ inputs.application-name }}" > build/app.txt
 
-      - name: Show build
+      - name: Check secret
         run: |
-          cat build/app.txt
+          if [ -n "${{ secrets.demo-secret }}" ]; then
+            echo "Secret was received successfully"
+          else
+            echo "Secret was not received"
+            exit 1
+          fi
