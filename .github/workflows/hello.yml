@@ -1,20 +1,34 @@
-name: Hello GitHub Actions
+name: CI Pipeline
 
 on:
   push:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  hello:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions"
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Show current directory
-        run: pwd
-
-      - name: List files
+      - name: Show files
         run: ls -la
+
+      - name: Build
+        run: echo "Building application..."
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: echo "Running tests..."
