@@ -1,0 +1,22 @@
+name: Reusable Build
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build application
+        run: |
+          echo "Building application..."
+          mkdir build
+          echo "Hello from reusable workflow" > build/app.txt
+
+      - name: Show build
+        run: |
+          cat build/app.txt
