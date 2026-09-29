@@ -8,5 +8,9 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
+
     with:
       application-name: my-demo-app
+
+    secrets:
+      demo-secret: ${{ secrets.DEMO_SECRET }}
