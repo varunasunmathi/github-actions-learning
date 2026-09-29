@@ -2,6 +2,10 @@ name: Reusable Build
 
 on:
   workflow_call:
+    inputs:
+      application-name:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -13,9 +17,9 @@ jobs:
 
       - name: Build application
         run: |
-          echo "Building application..."
+          echo "Building application: ${{ inputs.application-name }}"
           mkdir build
-          echo "Hello from reusable workflow" > build/app.txt
+          echo "Hello from ${{ inputs.application-name }}" > build/app.txt
 
       - name: Show build
         run: |
